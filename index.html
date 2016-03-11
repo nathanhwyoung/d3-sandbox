@@ -33,13 +33,15 @@
 				return i * (w / dataset.length);
 			})
 			.attr("y", function(d) {
-				return h - d; //Height minus data value
+				return h - (d * 4); //Height minus data value
 			})
 			.attr("width", w / dataset.length - barPadding)
 			.attr("height", function(d) {
-				return d * 4; //Just the data value NOT WORKING?!
+				return d * 4; //Just the data value
 			})
-			.attr("fill", "teal");
+			.attr("fill", function(d) {
+				return "rgb(0, 0, " + (d * 10) + ")";
+			});
 	</script>
 
 </body>
