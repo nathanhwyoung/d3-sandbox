@@ -11,39 +11,36 @@
 <body>
 
 	<script type="text/javascript">
-		//Width and height
-		var w = 1000;
+		var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+			11, 12, 15, 20, 18, 17, 16, 18, 23, 25
+		];
+		// Width and height
+		var w = 500;
 		var h = 100;
+		var barPadding = 1;
 
-		var dataset = [5, 10, 15, 20, 25];
-
-		// creates a variable reference to the body dom object
+		//Create SVG element
 		var svg = d3.select("body")
 			.append("svg")
 			.attr("width", w)
 			.attr("height", h);
 
-		// creates empty circle references for all data elements, binds the dataset
-		// with those elements, and adds them to the DOM
-		var circles = svg.selectAll("circle")
+		svg.selectAll("rect")
 			.data(dataset)
 			.enter()
-			.append("circle");
-
-		circles.attr("cx", function(d, i) {
-				return (i * 50) + 25;
+			.append("rect")
+			.attr("x", function(d, i) {
+				return i * (w / dataset.length);
 			})
-			.attr("cy", h / 2)
-			.attr("r", function(d) {
-				return d;
+			.attr("y", function(d) {
+				return h - d; //Height minus data value
 			})
-			.attr("fill", "yellow")
-			.attr("stroke", "orange")
-			.attr("stroke-width", function(d) {
-				return d / 2;
-			});
+			.attr("width", w / dataset.length - barPadding)
+			.attr("height", function(d) {
+				return d * 4; //Just the data value NOT WORKING?!
+			})
+			.attr("fill", "teal");
 	</script>
-
 
 </body>
 
