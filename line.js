@@ -20,4 +20,23 @@ var lineFun = d3.svg.line()
 	.interpolate("linear");
 
 var svg = d3.select("body").append("svg").attr({
-	width:w, height:h})
+	width:w, height:h});
+
+var viz = svg.append("path")
+	.attr({
+		d: lineFun(monthlySales),
+		"stroke": "purple",
+		"stroke-width": 2,
+		"fill": "none"
+	});
+
+// add labels
+var labels = svg.selectAll("text")
+	.data(monthlySales)
+	.enter()
+	.append("text")
+	.text(function(d){ return d.sales; })
+	.attr({
+		x: function(d){ return d.month*3; },
+		y: function(d){ return h-d.sales; },
+	});
