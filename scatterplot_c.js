@@ -44,6 +44,10 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(5);
 
+var formatAsPercentage = d3.format(".1%");
+
+xAxis.tickFormat(formatAsPercentage);
+
 //Create SVG element
 var svg = d3.select("body")
     .append("svg")
@@ -63,23 +67,6 @@ svg.selectAll("circle")
     .attr("r", function(d) {
         return rScale(d[1]);
     });
-
-// svg.selectAll("text")
-//     .data(dataset)
-//     .enter()
-//     .append("text")
-//     .text(function(d) {
-//         return d[0] + "," + d[1];
-//     })
-//     .attr("x", function(d) {
-//         return xScale(d[0]);
-//     })
-//     .attr("y", function(d) {
-//         return yScale(d[1]);
-//     })
-//     .attr("font-family", "sans-serif")
-//     .attr("font-size", "11px")
-//     .attr("fill", "red");
 
 svg.append("g")
     .attr("class", "axis") //Assign "axis" class
